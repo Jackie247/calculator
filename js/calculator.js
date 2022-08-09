@@ -41,7 +41,9 @@ function operatorBtns(){
     //subBtn.onclick = operate(subtract,a,b);
     //multBtn.onclick = operate(multiply,a,b);
     //divBtn.onclick = operate(divide,a,b);
-    clearBtn.onclick = clearDisplay();
+    clearBtn.onclick = () => {
+        clearDisplay();
+    }
 }
 
 function updateDisplay(){
@@ -55,11 +57,16 @@ function updateDisplay(){
     displayInputs.shift();
 }
 
-function storeInput(){previousInput = parseInt(displayInputs.join(""),10);}
+
 function clearDisplay(){
     const display = document.querySelector(".display");
-    display.textContent = "0";
-    return true;
+    if(displayInputs.length > 0){
+        display.textContent = "0";
+        displayInputs.splice(0);
+        return true;
+    }
+    return false;
+    
 }
 
 function operate(operator,previousInput){
@@ -79,10 +86,11 @@ function operate(operator,previousInput){
         return false;
     }
 }
-
+// Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
 function multiply(a,b){return a * b;}
 function divide(a,b){return a / b;}
-
+// General functions
+function storeInput(){previousInput = parseInt(displayInputs.join(""),10);}
 start();
