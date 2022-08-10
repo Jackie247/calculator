@@ -1,6 +1,6 @@
 displayInputs = [];
 previousInput = 0;
-result = 0;
+result = [];
 
 function start(){
     createNumberPad();
@@ -34,34 +34,40 @@ function operatorBtns(){
     let clearBtn = document.querySelector('.clear');
     // Assign functions
     addBtn.onclick = () => {
-        storeInput();
-        clearDisplay()
-        console.log(previousInput);
+        operate("add",previousInput);
+        console.log("previous input: " + previousInput);
     }
     //subBtn.onclick = operate(subtract,a,b);
     //multBtn.onclick = operate(multiply,a,b);
     //divBtn.onclick = operate(divide,a,b);
     clearBtn.onclick = () => {
         clearDisplay();
+        clearHistory();
     }
 }
 
 function updateDisplay(){
+    const history = document.querySelector(".history");
     const display = document.querySelector(".display");
-    // Only update display if array is adding positive integers
+    // If previous input exists. Display on screen
+    if(previousInput > 0){
+        history.textContent = previousInput;
+    }
+    // If the first input is not 0, update the display content.
     if(displayInputs[0] != "0") {
         display.textContent = displayInputs.join("");
         return true;
     }
-    // If first element is 0, dont want to keep in array.
+
+    // If first input is 0, remove from array.
     displayInputs.shift();
 }
 
 
 function clearDisplay(){
     const display = document.querySelector(".display");
+    display.textContent = "0";
     if(displayInputs.length > 0){
-        display.textContent = "0";
         displayInputs.splice(0);
         return true;
     }
@@ -69,9 +75,18 @@ function clearDisplay(){
     
 }
 
+function clearHistory(){
+    const history = document.querySelector(".history");
+    history.textContent = "";
+    previousInput = 0;
+    return true;
+}
+
 function operate(operator,previousInput){
-    if(operator == add){
-        return add(a,b);
+    if(operator == "add"){
+        storeInput();
+        clearDisplay()
+        updateDisplay();
     }
     else if(operator == subtract){
         return subtract(a,b);
@@ -92,5 +107,5 @@ function subtract(a,b){return a -b;}
 function multiply(a,b){return a * b;}
 function divide(a,b){return a / b;}
 // General functions
-function storeInput(){previousInput = parseInt(displayInputs.join(""),10);}
+function storeInput(){return previousInput += parseInt(displayInputs.join(""),10);}
 start();
