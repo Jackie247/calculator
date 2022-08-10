@@ -3,7 +3,7 @@ function calculator(){
     let previousInput = [];
     let result = 0;
     let operator = "";
-    createNumberPad(currInput);
+    //createNumberPad(currInput);
     // Select operator buttons
     const addBtn = document.querySelector('.add');
     const subBtn = document.querySelector('.sub');
@@ -16,9 +16,12 @@ function calculator(){
         // Assign current operator to addition
         operator = '+';
         // if a previous input exists. we want to simply display the result of adding both numbers.
-        if(previousInput.length === 1)
+        console.log(previousInput.length);
+        if(previousInput.length > 0)
         {
             result = operate(operator,currInput,previousInput);
+            showResult(result);
+            return true;
         }
         // When add button clicked, store the current input into previous input array.
         storeLastInput(previousInput,currInput.join(""));
@@ -51,7 +54,6 @@ function createNumberPad(currInput){
         button.onclick = () => {
             currInput.push(button.textContent);
             updateInputDisplay(currInput);
-            console.log(typeof currInput);
             console.log("Current input: " + currInput);
         };
         // append button to div container
@@ -86,7 +88,6 @@ function showResult(result){
         // Select display container
         const inputDisplay = document.querySelector(".display");
         inputDisplay.textContent = result;
-
 }
 function updateEquationDisplay(prevInput){
     const eqDisplay = document.querySelector(".equation");
@@ -129,15 +130,5 @@ function operate(operator,currentInput,previousInput){
     else{
         return false;
     }*/
-}
-function clearHistory(){
-    const history = document.querySelector(".history");
-    history.textContent = "";
-    previousInput = 0;
-    if(displayInputs.length > 0){
-        displayInputs.splice(0);
-        return true;
-    }
-    return true;
 }
 calculator();

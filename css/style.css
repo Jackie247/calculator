@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+}
+
+.body{
+    align-items:center;
+}
+/* Title section of page */
+header{
+    display:flex;
+    justify-content: center;
+}
+/* Main section of page with calculator */
+main{
+    display:flex;
+    justify-content: center;
+}
+
+.calculator{
+    height:auto;
+    width:auto;
+    border:1px solid #2d2d2d;
+    display:flex;
+    flex-flow:column wrap;
+    justify-content: center;
+    align-items:center;
+}
+
+.buttons{
+    display:flex;
+    flex-flow:row wrap;
+}
+
+.numbers{
+    display:grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns:repeat(3,1fr);
+}
+.btn-functions{
+    display:grid;
+    grid-template-rows:repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
+}
+
+.clear{
+
+}
+/* Footer section of page  */
+footer{
+    display:flex;
+    justify-content: center;
+}
+
