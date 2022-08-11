@@ -1,56 +1,32 @@
-function calculator(){
-    let currInput = [];
-    let previousInput = [];
-    let result = 0;
-    let operator = "";
-    // Select operator buttons
-    const addBtn = document.querySelector('.add');
-    const subBtn = document.querySelector('.sub');
-    const multBtn = document.querySelector('.mult');
-    const divBtn = document.querySelector('.divide');
-    const clearBtn = document.querySelector('.clear');
-    const equalsBtn = document.querySelector(".equals");
-    // Assign functions
-    createNumberPad(currInput);
-    addBtn.onclick = () => {
-        // Assign current operator to addition
-        operator = '+';
-        // if a previous input exists. we want to simply display the result of adding both numbers.
-        console.log(previousInput.length);
-        if(previousInput.length > 0)
-        {
-            result = operate(operator,currInput,previousInput);
-            showResult(result);
-            return true;
-        }
-        // When add button clicked, store the current input into previous input array.
-        storeLastInput(previousInput,currInput.join(""));
-        updateEquationDisplay(previousInput);
-        clearCurrentInput(currInput);
-        console.log("previous input: " + previousInput);
-    }
-    //subBtn.onclick = operate(subtract,a,b);
-    //multBtn.onclick = operate(multiply,a,b);
-    //divBtn.onclick = operate(divide,a,b);
-    clearBtn.onclick = () => {
-        clearDisplay();
-    }
-    equalsBtn.onclick = () => {
-        result = operate(operator,previousInput,currInput);
-        clearEquationDisplay()
-        showResult(result);
-    }
-}
-function createNumberPad(currInput){
-    // Select button div container
-    const buttonDiv = document.querySelectorAll(".button");
-    console.log(buttonDiv);
-    buttonDiv.forEach((button) => button.addEventListener('click', () => {
+// Variables to store inputs
+let firstInput = "";
+let secondInput = "";
+let operation = null;
+
+const btnFunctions = ["add","subtract","multiply","divide"];
+
+// Select operator buttons
+const buttons = document.querySelectorAll('.gridBtn')
+const addBtn = document.querySelector('.add');
+const subBtn = document.querySelector('.sub');
+const multBtn = document.querySelector('.mult');
+const divBtn = document.querySelector('.divide');
+const clearBtn = document.querySelector('.clear');
+const equalsBtn = document.querySelector(".equals");
+
+buttons.forEach((button)=>{
+    button.addEventListener('click',()=>{
         currInput.push(button.textContent);
         updateInputDisplay(currInput);
         console.log("Current input: " + currInput);
-    }))
-}
+    })
+})
+
+addBtn.addEventListener('click',() => {
+    operate(btnFunctions["add"],firstInput,secondInput);
+})
+
+
 // Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
@@ -63,6 +39,23 @@ function storeLastInput(prevInput,input){
         return true;
     }
     return false;
+}
+
+function operate(operator,a,b){
+    a = parseInt(a,10);
+    b = parseInt(b,10)
+    switch(operator){
+        case "add":
+            return add(a,b);
+        case "subtract":
+            return subtract(a,b);
+        case "multiply":
+            return multiply(a,b);
+        case "divide":
+            return divide(a,b);
+        default:
+            return false;
+    }
 }
 function updateInputDisplay(currInput){
     // Select display container
@@ -99,27 +92,3 @@ function clearEquationDisplay(){
     eqDisplay.textContent = "";
     return true;
 }
-function operate(operator,currentInput,previousInput){
-    if(operator == "+"){
-        let result = add(
-            parseInt(currentInput.join(""),10),
-            parseInt(previousInput.join(""),10)
-        );
-        console.log("Final result: " + result);
-        return result;
-    }
-    /*
-    else if(operator == subtract){
-        return subtract(a,b);
-    }
-    else if(operator == multiply){
-        return multiply(a,b);
-    }
-    else if(operator == divide){
-        return divide(a,b);
-    }
-    else{
-        return false;
-    }*/
-}
-calculator();
