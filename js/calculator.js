@@ -3,7 +3,6 @@ function calculator(){
     let previousInput = [];
     let result = 0;
     let operator = "";
-    //createNumberPad(currInput);
     // Select operator buttons
     const addBtn = document.querySelector('.add');
     const subBtn = document.querySelector('.sub');
@@ -12,6 +11,7 @@ function calculator(){
     const clearBtn = document.querySelector('.clear');
     const equalsBtn = document.querySelector(".equals");
     // Assign functions
+    createNumberPad(currInput);
     addBtn.onclick = () => {
         // Assign current operator to addition
         operator = '+';
@@ -43,22 +43,13 @@ function calculator(){
 }
 function createNumberPad(currInput){
     // Select button div container
-    const buttonDiv = document.querySelector(".numbers");
-    // Create 10 numbers 0-9
-    for(let i = 0; i < 10; i++){
-        let button = document.createElement("button");
-        // button properties
-        button.textContent = i;
-        button.type = "button";
-        // button functions
-        button.onclick = () => {
-            currInput.push(button.textContent);
-            updateInputDisplay(currInput);
-            console.log("Current input: " + currInput);
-        };
-        // append button to div container
-        buttonDiv.appendChild(button);
-    }
+    const buttonDiv = document.querySelectorAll(".button");
+    console.log(buttonDiv);
+    buttonDiv.forEach((button) => button.addEventListener('click', () => {
+        currInput.push(button.textContent);
+        updateInputDisplay(currInput);
+        console.log("Current input: " + currInput);
+    }))
 }
 // Arithmetic helper functions
 function add(a,b){return a+b;}

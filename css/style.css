@@ -22,10 +22,17 @@ main{
     border:1px solid #2d2d2d;
     display:flex;
     flex-flow:column wrap;
-    justify-content: center;
-    align-items:center;
 }
-
+.equation{
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: flex-end;
+}
+.display{
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: flex-end;
+}
 .buttons{
     display:flex;
     flex-flow:row wrap;
