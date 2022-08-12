@@ -18,7 +18,8 @@ buttons.forEach((button)=>{
 opButtons.forEach((button) => {
     button.addEventListener('click', () => {updateCurrOperation(button.textContent)});
 });
-
+clearBtn.addEventListener('click',() => {clear()});
+equalsBtn.addEventListener('click',()=>{calculate()});
 // Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
@@ -35,14 +36,17 @@ function inputNum(button){
     }
 }
 function calculate(){
-    firstInput = historyDisplay.textContent;
-    secondInput = inputDisplay.textContent;
-    let result = operate(operation,firstInput,secondInput);
+    prevInput = historyDisplay.textContent;
+    currInput = inputDisplay.textContent;
+    let result = operate(operation,prevInput,currInput);
     inputDisplay.textContent = result;
     operation = null;
 }
 
 function updateCurrOperation(operator){
+    prevInput = inputDisplay.textContent;
+    historyDisplay.textContent = prevInput;
+    inputDisplay.textContent = "0";
     operation = operator;
     console.log(operation);
 }
@@ -50,13 +54,13 @@ function operate(operator,a,b){
     a = parseInt(a,10);
     b = parseInt(b,10);
     switch(operator){
-        case "add":
+        case "+":
             return add(a,b);
-        case "subtract":
+        case "-":
             return subtract(a,b);
-        case "multiply":
+        case "x":
             return multiply(a,b);
-        case "divide":
+        case "÷":
             return divide(a,b);
         default:
             return false;
@@ -64,5 +68,6 @@ function operate(operator,a,b){
 }
 
 function clear(){
-
+    inputDisplay.textContent = "0";
+    historyDisplay.textContent = "";
 }
