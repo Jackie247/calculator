@@ -38,6 +38,7 @@ function inputNum(button){
 function calculate(){
     prevInput = historyDisplay.textContent;
     currInput = inputDisplay.textContent;
+    historyDisplay.textContent = `${prevInput} ${currInput} =`;
     let result = operate(operation,prevInput,currInput);
     inputDisplay.textContent = result;
     operation = null;
@@ -45,7 +46,7 @@ function calculate(){
 
 function updateCurrOperation(operator){
     prevInput = inputDisplay.textContent;
-    historyDisplay.textContent = prevInput;
+    historyDisplay.textContent = `${prevInput} ${operator}`;
     inputDisplay.textContent = "0";
     operation = operator;
     console.log(operation);
