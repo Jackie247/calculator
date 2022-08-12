@@ -1,31 +1,23 @@
 // Variables to store inputs
-let firstInput = "";
-let secondInput = "";
+let prevInput = "";
+let currInput = "";
 let operation = null;
 
-const btnFunctions = ["add","subtract","multiply","divide"];
-
 // Select operator buttons
-const buttons = document.querySelectorAll('.gridBtn')
-const addBtn = document.querySelector('.add');
-const subBtn = document.querySelector('.sub');
-const multBtn = document.querySelector('.mult');
-const divBtn = document.querySelector('.divide');
+const buttons = document.querySelectorAll('.gridBtn');
+const opButtons = document.querySelectorAll('.operatorBtn');
 const clearBtn = document.querySelector('.clear');
 const equalsBtn = document.querySelector(".equals");
+// Select display container
+const historyDisplay = document.querySelector(".history");
+const inputDisplay = document.querySelector(".display");
 
-buttons.forEach((button)=>{
-    button.addEventListener('click',()=>{
-        currInput.push(button.textContent);
-        updateInputDisplay(currInput);
-        console.log("Current input: " + currInput);
-    })
-})
-
-addBtn.addEventListener('click',() => {
-    operate(btnFunctions["add"],firstInput,secondInput);
-})
-
+buttons.forEach((button)=>{ 
+    button.addEventListener('click',()=>{inputNum(button);})
+});
+opButtons.forEach((button) => {
+    button.addEventListener('click', () => {updateCurrOperation(button.textContent)});
+});
 
 // Arithmetic helper functions
 function add(a,b){return a+b;}
@@ -33,17 +25,30 @@ function subtract(a,b){return a -b;}
 function multiply(a,b){return a * b;}
 function divide(a,b){return a / b;}
 // General functions
-function storeLastInput(prevInput,input){
-    if(input.length > 0){
-        prevInput.push(input);
-        return true;
+function inputNum(button){
+    if(inputDisplay.textContent == '0'){
+        inputDisplay.textContent = button.textContent
     }
-    return false;
+    else{
+        inputDisplay.textContent += button.textContent;
+        console.log("Current input: " + inputDisplay.textContent);
+    }
+}
+function calculate(){
+    firstInput = historyDisplay.textContent;
+    secondInput = inputDisplay.textContent;
+    let result = operate(operation,firstInput,secondInput);
+    inputDisplay.textContent = result;
+    operation = null;
 }
 
+function updateCurrOperation(operator){
+    operation = operator;
+    console.log(operation);
+}
 function operate(operator,a,b){
     a = parseInt(a,10);
-    b = parseInt(b,10)
+    b = parseInt(b,10);
     switch(operator){
         case "add":
             return add(a,b);
@@ -55,40 +60,9 @@ function operate(operator,a,b){
             return divide(a,b);
         default:
             return false;
-    }
+    };
 }
-function updateInputDisplay(currInput){
-    // Select display container
-    const inputDisplay = document.querySelector(".display");
-    // Update input display if user presses non zero key.
-    if(currInput[0] != "0") {
-        inputDisplay.textContent = currInput.join("");
-        return true;
-    }
-    // If first input is 0, remove from array.
-    calc.currInput.shift();
-}
-function showResult(result){
-        // Select display container
-        const inputDisplay = document.querySelector(".display");
-        inputDisplay.textContent = result;
-}
-function updateEquationDisplay(prevInput){
-    const eqDisplay = document.querySelector(".equation");
-    eqDisplay.textContent = prevInput.join(" + ");
-    return true;
-}
-function clearCurrentInput(currInput){
-    const inputDisplay = document.querySelector(".display");
-    if(currInput.length > 0){
-        currInput.splice(0);
-        inputDisplay.textContent = "0";
-        return true;
-    }
-    return false;
-}
-function clearEquationDisplay(){
-    const eqDisplay = document.querySelector(".equation");
-    eqDisplay.textContent = "";
-    return true;
+
+function clear(){
+
 }

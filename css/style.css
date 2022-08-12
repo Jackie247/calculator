@@ -27,20 +27,22 @@ main{
     display:flex;
     flex-flow:column wrap;
 }
-.equation{
+.history{
     display:flex;
     flex-flow:row wrap;
     justify-content: flex-end;
+    font-size: 20px;
 }
 .display{
     display:flex;
     flex-flow:row wrap;
     justify-content: flex-end;
+    font-size: 32px;
 }
 .buttons{
     display:grid;
     grid-template-rows: repeat(4, 1fr);
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     grid-gap: 5px;
 }
 
