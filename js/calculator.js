@@ -2,7 +2,6 @@
 let prevInput = "";
 let currInput = "";
 let operation = null;
-let result = null;
 // Select operator buttons
 const buttons = document.querySelectorAll('.gridBtn');
 const opButtons = document.querySelectorAll('.operatorBtn');
@@ -29,36 +28,30 @@ function multiply(a,b){return a * b;}
 function divide(a,b){return a / b;}
 // General functions
 function inputNum(button){
-    if(inputDisplay.textContent == "0"){
+    // When a number is pressed, replace zero
+    if(inputDisplay.textContent == "0" || historyDisplay.textContent == `${prevInput} ${operation}`){
         inputDisplay.textContent = "";
     }
+    // Append number to display.
     inputDisplay.textContent += button.textContent;
 }
-function calculate(){
-    currInput = inputDisplay.textContent;
-    prevInput = historyDisplay.textContent;
-    result = operate(operation,prevInput,currInput);
-    historyDisplay.textContent = `${prevInput} ${operation} ${currInput} =`;
-    inputDisplay.textContent = result;
-    operation = null;
-    return true;
-}
-
 function updateOperation(operator){
     // If an operation already exists, we want to caculate the result of the current inputs
     // If we dont calculate a result, the inputs get overwritten.
-    if(operation !== null){
-        // Operator has been set
-        calculate()
-        return true;
-    }
+    if(operation !== null){calculate()}
+    // Get previous input as "a" value;
+    prevInput = inputDisplay.textContent;
     operation = operator;
-    updateHistory();
+    historyDisplay.textContent = `${prevInput} ${operation}`
 }
-
-function updateHistory(){
-    historyDisplay.textContent = `${inputDisplay.textContent}`;
-    inputDisplay.textContent = "0";
+function calculate(){
+    if(operation == null || historyDisplay.textContent == `${prevInput}`) return;
+    // Get current input as "b" value
+    currInput = inputDisplay.textContent;
+    inputDisplay.textContent = operate(operation,prevInput,currInput);
+    historyDisplay.textContent = `${prevInput} ${operation} ${currInput} =`;
+    // Display result after calculating
+    operation = null;
 }
 function operate(operator,a,b){
     a = parseInt(a,10);
@@ -81,6 +74,9 @@ function operate(operator,a,b){
 function clear(){
     inputDisplay.textContent = "0";
     historyDisplay.textContent = "";
+    prevInput = "";
+    currInput = "";
+    operation = null;
 }
 
 function delNum(){
