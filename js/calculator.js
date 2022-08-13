@@ -2,6 +2,7 @@
 let prevInput = "";
 let currInput = "";
 let operation = null;
+let clearInput = false;
 // Select operator buttons
 const buttons = document.querySelectorAll('.gridBtn');
 const opButtons = document.querySelectorAll('.operatorBtn');
@@ -29,8 +30,9 @@ function divide(a,b){return a / b;}
 // General functions
 function inputNum(button){
     // When a number is pressed, replace zero
-    if(inputDisplay.textContent == "0" || historyDisplay.textContent == `${prevInput} ${operation}`){
+    if(inputDisplay.textContent == "0" || clearInput){
         inputDisplay.textContent = "";
+        clearInput = false;
     }
     // Append number to display.
     inputDisplay.textContent += button.textContent;
@@ -43,9 +45,10 @@ function updateOperation(operator){
     prevInput = inputDisplay.textContent;
     operation = operator;
     historyDisplay.textContent = `${prevInput} ${operation}`
+    clearInput = true;
 }
 function calculate(){
-    if(operation == null || historyDisplay.textContent == `${prevInput}`) return;
+    if(operation == null || clearInput) return;
     // Get current input as "b" value
     currInput = inputDisplay.textContent;
     inputDisplay.textContent = formatNumber(operate(operation,prevInput,currInput));
