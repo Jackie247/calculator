@@ -48,7 +48,7 @@ function calculate(){
     if(operation == null || historyDisplay.textContent == `${prevInput}`) return;
     // Get current input as "b" value
     currInput = inputDisplay.textContent;
-    inputDisplay.textContent = operate(operation,prevInput,currInput);
+    inputDisplay.textContent = formatNumber(operate(operation,prevInput,currInput));
     historyDisplay.textContent = `${prevInput} ${operation} ${currInput} =`;
     // Display result after calculating
     operation = null;
@@ -71,6 +71,15 @@ function operate(operator,a,b){
     };
 }
 
+function formatNumber(num){
+    if(!Number.isInteger(num) 
+        && !Number.isNaN(num))
+        {
+            // Float
+            return num.toFixed(2);
+        }
+    return num;
+}
 function clear(){
     inputDisplay.textContent = "0";
     historyDisplay.textContent = "";
