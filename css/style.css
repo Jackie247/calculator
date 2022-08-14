@@ -59,8 +59,21 @@ main{
     grid-template-columns:repeat(5,1fr);
     grid-gap: 5px;
     height:300px;
+    
 }
+.buttons button{
+    height:75px;
+    width:50px;
+    font-size: 30px;
+    padding:3px;
+    border:0;
+}
+.answer{
+    font-size:14px;
+}
+.gridBtn{
 
+}
 /* Footer section of page  */
 .footer{
     display:flex;
