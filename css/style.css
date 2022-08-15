@@ -29,13 +29,14 @@ main{
 }
 
 .screen{
+    width:100%;
     display:flex;
     flex-flow:column wrap;
     background-color:#fff;
     justify-content: flex-end;
     height:75px;
     font-family: 'Orbitron', sans-serif;
-    padding:5px;
+    overflow:hidden;
 }
 /* History equation display*/
 .history{
@@ -51,6 +52,7 @@ main{
     justify-content: flex-end;
     align-items: bottom;
     font-size: 32px;
+
 }
 /* Numpad of calculator*/
 .buttons{
