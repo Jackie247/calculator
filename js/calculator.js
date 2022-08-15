@@ -28,7 +28,10 @@ equalsBtn.addEventListener('click',()=>{calculate()});
 delBtn.addEventListener("click", () => {delNum()})
 ansBtn.addEventListener("click", () => {answer()})
 dotbtn.addEventListener("click",() => {addDot()});
-factorialBtn.addEventListener("click", () => {})
+factorialBtn.addEventListener("click", () => {
+    prevInput = factorial(inputDisplay.textContent);
+    inputDisplay.textContent = prevInput;
+})
 // Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
@@ -139,6 +142,11 @@ function delNum(){
 }
 
 function factorial(num){
+    if(num.includes(".") || parseInt(num,10) < 1){
+        alert("Not an positive integer");
+        return;
+    }
+    parseInt(num,10);
     let sum = 1;
     for(let i = 1; i <=num; i++){
         sum *= i;
