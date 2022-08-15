@@ -37,6 +37,7 @@ main{
     height:75px;
     font-family: 'Orbitron', sans-serif;
     overflow:hidden;
+    padding:0 1rem;
 }
 /* History equation display*/
 .history{
@@ -75,13 +76,14 @@ main{
     transition-timing-function: ease-in;
 }
 .operatorBtn{
-    background-color: #ff9500;
+    background-color: #adadad;
+    
 }
 .delete{
-    background-color: #adadad;
+    background-color: #ff9500;
 }
 .clear{
-    background-color: #adadad;
+    background-color: #ff9500;
 }
 .answer{
     background-color: #adadad;
@@ -89,6 +91,7 @@ main{
 }
 .equals{
     background-color: #adadad;
+
 }
 .dotBtn{
     font-weight:bolder;
