@@ -27,7 +27,7 @@ clearBtn.addEventListener('click',() => {clear()});
 equalsBtn.addEventListener('click',()=>{calculate()});
 delBtn.addEventListener("click", () => {delNum()})
 ansBtn.addEventListener("click", () => {answer()})
-dotbtn.addEventListener("click",() => {inputNum(dotbtn)});
+dotbtn.addEventListener("click",() => {addDot()});
 factorialBtn.addEventListener("click", () => {})
 // Arithmetic helper functions
 function add(a,b){return a+b;}
@@ -39,10 +39,17 @@ function inputNum(button){
     // When a number is pressed, replace zero
     if(inputDisplay.textContent == "0" || clearInput){
         inputDisplay.textContent = "";
-        clearInput = false;
+        clearInput = false; 
     }
     // Append number to display.
     inputDisplay.textContent += button.textContent;
+}
+
+function addDot(){
+    if(inputDisplay.textContent.includes(".")){
+        return;
+    }
+    inputDisplay.textContent += ".";
 }
 function updateOperation(operator){
     // If an operation already exists, we want to caculate the result of the current inputs
@@ -64,7 +71,6 @@ function calculate(){
     // Display result after calculating
     operation = null;
 }
-
 
 function operate(operator,a,b){
     if(a.includes(".") && b.includes(".")){
