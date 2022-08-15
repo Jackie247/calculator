@@ -12,6 +12,7 @@ const equalsBtn = document.querySelector(".equals");
 const delBtn = document.querySelector(".delete");
 const ansBtn = document.querySelector(".answer");
 const dotbtn = document.querySelector(".dotBtn");
+const factorialBtn = document.querySelector(".factorialBtn");
 // Select display container
 const historyDisplay = document.querySelector(".history");
 const inputDisplay = document.querySelector(".display");
@@ -26,6 +27,8 @@ clearBtn.addEventListener('click',() => {clear()});
 equalsBtn.addEventListener('click',()=>{calculate()});
 delBtn.addEventListener("click", () => {delNum()})
 ansBtn.addEventListener("click", () => {answer()})
+dotbtn.addEventListener("click",() => {});
+factorialBtn.addEventListener("click", () => {})
 // Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
@@ -62,13 +65,7 @@ function calculate(){
     operation = null;
 }
 
-function answer(){
-    if(lastResult !== null){
-        inputDisplay.textContent = lastResult;
-        return true;
-    }
-    return;
-}
+
 function operate(operator,a,b){
     a = parseInt(a,10);
     b = parseInt(b,10);
@@ -85,6 +82,14 @@ function operate(operator,a,b){
         default:
             return false;
     };
+}
+
+function answer(){
+    if(lastResult !== null){
+        inputDisplay.textContent = lastResult;
+        return true;
+    }
+    return;
 }
 
 function formatNumber(num){
@@ -111,4 +116,12 @@ function delNum(){
         return;
     }
     inputDisplay.textContent = inputDisplay.textContent.slice(0,-1);
+}
+
+function factorial(num){
+    let sum = 1;
+    for(let i = 1; i <=num; i++){
+        sum *= i;
+    }
+    return sum;
 }
