@@ -68,11 +68,29 @@ main{
     padding:3px;
     border:0;
 }
+.buttons button:hover{
+    opacity:0.5;
+    transition-timing-function: ease-in;
+}
+.operatorBtn{
+    background-color: #ff9500;
+}
+.delete{
+    background-color: #adadad;
+}
+.clear{
+    background-color: #adadad;
+}
 .answer{
+    background-color: #adadad;
     font-size:14px;
 }
-.gridBtn{
-
+.equals{
+    background-color: #adadad;
+}
+.dotBtn{
+    font-weight:bolder;
+    font-size:36px;
 }
 /* Footer section of page  */
 .footer{

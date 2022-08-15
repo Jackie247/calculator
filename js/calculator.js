@@ -3,12 +3,15 @@ let prevInput = "";
 let currInput = "";
 let operation = null;
 let clearInput = false;
+let lastResult = null;
 // Select operator buttons
 const buttons = document.querySelectorAll('.gridBtn');
 const opButtons = document.querySelectorAll('.operatorBtn');
 const clearBtn = document.querySelector('.clear');
 const equalsBtn = document.querySelector(".equals");
 const delBtn = document.querySelector(".delete");
+const ansBtn = document.querySelector(".answer");
+const dotbtn = document.querySelector(".dotBtn");
 // Select display container
 const historyDisplay = document.querySelector(".history");
 const inputDisplay = document.querySelector(".display");
@@ -22,6 +25,7 @@ opButtons.forEach((button) => {
 clearBtn.addEventListener('click',() => {clear()});
 equalsBtn.addEventListener('click',()=>{calculate()});
 delBtn.addEventListener("click", () => {delNum()})
+ansBtn.addEventListener("click", () => {answer()})
 // Arithmetic helper functions
 function add(a,b){return a+b;}
 function subtract(a,b){return a -b;}
@@ -52,9 +56,18 @@ function calculate(){
     // Get current input as "b" value
     currInput = inputDisplay.textContent;
     inputDisplay.textContent = formatNumber(operate(operation,prevInput,currInput));
+    lastResult = inputDisplay.textContent;
     historyDisplay.textContent = `${prevInput} ${operation} ${currInput} =`;
     // Display result after calculating
     operation = null;
+}
+
+function answer(){
+    if(lastResult !== null){
+        inputDisplay.textContent = lastResult;
+        return true;
+    }
+    return;
 }
 function operate(operator,a,b){
     a = parseInt(a,10);
@@ -89,6 +102,7 @@ function clear(){
     prevInput = "";
     currInput = "";
     operation = null;
+    lastResult = "0";
 }
 
 function delNum(){
