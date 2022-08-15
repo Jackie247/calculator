@@ -27,7 +27,7 @@ clearBtn.addEventListener('click',() => {clear()});
 equalsBtn.addEventListener('click',()=>{calculate()});
 delBtn.addEventListener("click", () => {delNum()})
 ansBtn.addEventListener("click", () => {answer()})
-dotbtn.addEventListener("click",() => {});
+dotbtn.addEventListener("click",() => {inputNum(dotbtn)});
 factorialBtn.addEventListener("click", () => {})
 // Arithmetic helper functions
 function add(a,b){return a+b;}
@@ -67,8 +67,22 @@ function calculate(){
 
 
 function operate(operator,a,b){
-    a = parseInt(a,10);
-    b = parseInt(b,10);
+    if(a.includes(".") && b.includes(".")){
+        a = parseFloat(a);
+        b = parseFloat(b);
+    }
+    else if(a.includes(".")){
+        a = parseFloat(a);
+        b = parseInt(b,10);
+    }
+    else if(b.includes(".")){
+        a = parseInt(a,10);
+        b = parseFloat(b)
+    }
+    else{
+        a = parseInt(a,10);
+        b = parseInt(b,10);
+    }
     switch(operator){
         case "+":
             return add(a,b);
